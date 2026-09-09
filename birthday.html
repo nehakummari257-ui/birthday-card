@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Birthday Surprise 💗</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Comic Sans MS", Arial, sans-serif;
+            background: linear-gradient(135deg, #ffd5e7, #fff0f7, #e2d6ff);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* =========================
+           PAGES
+        ========================= */
+
+        .page {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.92);
+            width: 92%;
+            max-width: 650px;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 35px 25px;
+            border-radius: 35px;
+            border: 4px solid #ff9fc5;
+            box-shadow: 0 15px 40px rgba(255,80,140,0.3);
+            position: relative;
+            z-index: 5;
+        }
+
+        /* =========================
+           TEXT
+        ========================= */
+
+        h1 {
+            color: #ff4b91;
+            font-size: 48px;
+            margin: 15px 0;
+        }
+
+        h2 {
+            color: #ff609e;
+            font-size: 30px;
+            margin: 15px 0;
+        }
+
+        p {
+            color: #985c78;
+            font-size: 19px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           TEDDY
+        ========================= */
+
+        .teddy {
+            font-size: 90px;
+            transition: all 0.5s ease;
+        }
+
+        .normal-teddy {
+            animation: floatTeddy 2s infinite ease-in-out;
+        }
+
+        @keyframes floatTeddy {
+
+            0%,100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(5deg);
+            }
+
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        button {
+            font-family: "Comic Sans MS", Arial, sans-serif;
+            cursor: pointer;
+        }
+
+        .continue {
+            margin-top: 20px;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg,#ff4f92,#ff82b5);
+            color: white;
+            font-size: 19px;
+            font-weight: bold;
+            box-shadow: 0 7px 15px rgba(255,80,140,0.3);
+        }
+
+        .continue:hover {
+            transform: scale(1.07);
+        }
+
+        /* =========================
+           GIFT BUTTONS
+        ========================= */
+
+        .gifts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .gift {
+            padding: 20px 10px;
+            border: 3px solid #ffacd0;
+            border-radius: 25px;
+            background: #fff3f8;
+            color: #d64d87;
+            font-size: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .gift:hover {
+            background: #ffd8e9;
+            transform: scale(1.07);
+            box-shadow: 0 8px 20px rgba(255,100,160,0.25);
+        }
+
+        .gift-icon {
+            display: block;
+            font-size: 45px;
+            margin-bottom: 8px;
+        }
+
+        /* =========================
+           LOVE BUTTONS
+        ========================= */
+
+        .love-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .less,
+        .more {
+            border: none;
+            padding: 17px 35px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .less {
+            background: #d9d9d9;
+            color: #666;
+        }
+
+        .more {
+            background: #ff5c9e;
+            color: white;
+        }
+
+        .less:hover,
+        .more:hover {
+            transform: scale(1.08);
+        }
+
+        /* =========================
+           SAD TEDDY
+        ========================= */
+
+        #sadTeddy {
+            font-size: 80px;
+            transition: 0.5s;
+        }
+
+        .sad-text {
+            color: #a66b82;
+            font-size: 18px;
+        }
+
+        /* =========================
+           HAPPY TEDDY
+        ========================= */
+
+        #happyTeddy {
+            font-size: 100px;
+        }
+
+        .happyDance {
+            animation: dance 0.35s infinite alternate;
+        }
+
+        @keyframes dance {
+
+            0% {
+                transform: rotate(-15deg) translateY(0);
+            }
+
+            100% {
+                transform: rotate(15deg) translateY(-25px);
+            }
+
+        }
+
+        /* =========================
+           BIRTHDAY
+        ========================= */
+
+        .birthday {
+            color: #ff3985;
+            font-size: 40px;
+            font-weight: bold;
+            margin: 25px 0;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+        }
+
+        /* =========================
+           LOVE LETTER
+        ========================= */
+
+        .letter {
+            background: #fff8fb;
+            border: 2px dashed #ff9fc5;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+            color: #7c4d63;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .letter p {
+            font-size: 17px;
+        }
+
+        /* =========================
+           DECORATIONS
+        ========================= */
+
+        .decoration {
+            position: fixed;
+            font-size: 35px;
+            z-index: 1;
+            animation: floating 4s infinite ease-in-out;
+        }
+
+        .d1 {
+            top: 5%;
+            left: 4%;
+        }
+
+        .d2 {
+            top: 8%;
+            right: 5%;
+            animation-delay: 1s;
+        }
+
+        .d3 {
+            bottom: 8%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        .d4 {
+            bottom: 10%;
+            right: 5%;
+            animation-delay: 1.5s;
+        }
+
+        .d5 {
+            top: 45%;
+            left: 2%;
+            animation-delay: 0.5s;
+        }
+
+        .d6 {
+            top: 50%;
+            right: 2%;
+            animation-delay: 2s;
+        }
+
+        @keyframes floating {
+
+            0%,100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(15deg);
+            }
+
+        }
+
+        /* =========================
+           POP EFFECT
+        ========================= */
+
+        .pop {
+            position: fixed;
+            pointer-events: none;
+            font-size: 30px;
+            z-index: 100;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:500px) {
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 25px;
+            }
+
+            .teddy {
+                font-size: 70px;
+            }
+
+            .gift {
+                font-size: 17px;
+                padding: 15px 5px;
+            }
+
+            .gift-icon {
+                font-size: 38px;
+            }
+
+            .love-buttons {
+                gap: 12px;
+            }
+
+            .less,
+            .more {
+                padding: 14px 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     FLOATING DECORATIONS
+===================================== -->
+
+<div class="decoration d1">🌸</div>
+<div class="decoration d2">🌷</div>
+<div class="decoration d3">🌼</div>
+<div class="decoration d4">💗</div>
+<div class="decoration d5">✨</div>
+<div class="decoration d6">🦋</div>
+
+
+<!-- =====================================
+     PAGE 1
+===================================== -->
+
+<div id="page1" class="page active">
+
+    <div class="card">
+
+        <div class="teddy normal-teddy">
+            🧸
+        </div>
+
+        <div>✨ 🌸 💗 🌸 ✨</div>
+
+        <h1>
+            Welcome Cutie 💕
+        </h1>
+
+        <p>
+            I have a little surprise<br>
+            specially made for you! 🥰
+        </p>
+
+        <button class="continue" onclick="goToPage(2)">
+            Click Here to Continue 💗
+        </button>
+
+        <div>
+            🌷 💕 🌷
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     PAGE 2 - GIFT
+===================================== -->
+
+<div id="page2" class="page">
+
+    <div class="card">
+
+        <div class="teddy normal-teddy">
+            🧸🎁
+        </div>
+
+        <h2>
+            What Gift Do You Want? 🎀
+        </h2>
+
+        <p>
+            Choose your favorite one! 💗
+        </p>
+
+        <div class="gifts">
+
+            <button class="gift"
+                    onclick="chooseGift('Dress 👗')">
+
+                <span class="gift-icon">
+                    👗
+                </span>
+
+                Dress
+
+            </button>
+
+
+            <button class="gift"
+                    onclick="chooseGift('Watch ⌚')">
+
+                <span class="gift-icon">
+                    ⌚
+                </span>
+
+                Watch
+
+            </button>
+
+
+            <button class="gift"
+                    onclick="chooseGift('Shoes 👟')">
+
+                <span class="gift-icon">
+                    👟
+                </span>
+
+                Shoes
+
+            </button>
+
+
+            <button class="gift"
+                    onclick="chooseGift('Bracelet 💎')">
+
+                <span class="gift-icon">
+                    💎
+                </span>
+
+                Bracelet
+
+            </button>
+
+        </div>
+
+        <div>
+            🌸 ✨ 🌸 ✨ 🌸
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     PAGE 3 - HOW MUCH LOVE?
+===================================== -->
+
+<div id="page3" class="page">
+
+    <div class="card">
+
+        <div id="sadTeddy">
+            🥺🧸
+        </div>
+
+        <h2>
+            How Much Do You Love Me? 🥹💗
+        </h2>
+
+        <p>
+            Be honest... 😌
+        </p>
+
+        <p class="sad-text" id="loveMessage">
+            Choose carefully! 👀
+        </p>
+
+        <div class="love-buttons">
+
+            <button class="less"
+                    onclick="lessLove()">
+                Less 😐
+            </button>
+
+            <button class="more"
+                    onclick="moreLove()">
+                More 💗
+            </button>
+
+        </div>
+
+        <div>
+            🌸 💕 ✨ 💕 🌸
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     PAGE 4 - HAPPY SURPRISE
+===================================== -->
+
+<div id="page4" class="page">
+
+    <div class="card">
+
+        <div id="happyTeddy">
+            🧸
+        </div>
+
+        <div>
+            🎉 💗 🎊 💕 🎉
+        </div>
+
+        <h1>
+            YAYYYYY!!! 🥳
+        </h1>
+
+        <h2>
+            I KNEW IT!! 😭💗
+        </h2>
+
+        <p>
+            You chose MORE! 😍<br>
+            My teddy is officially the happiest teddy ever!
+        </p>
+
+        <button class="continue"
+                onclick="goToPage(5)">
+            One Last Surprise 💌
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     PAGE 5 - LOVE LETTER
+===================================== -->
+
+<div id="page5" class="page">
+
+    <div class="card">
+
+        <div class="teddy">
+            🧸💗
+        </div>
+
+        <h2>
+            A Little Letter For You 💌
+        </h2>
+
+        <div class="letter">
+
+            <p>
+                My dearest cutie,
+            </p>
+
+            <p>
+                I honestly don't know if words can ever
+                properly explain how special you are to me.
+                But today, on your birthday, I just want
+                you to know how incredibly happy I am that
+                you exist. 💗
+            </p>
+
+            <p>
+                You have this beautiful way of making
+                ordinary moments feel special. Your smile,
+                your little habits, your silly moments,
+                and even the things you think nobody notices
+                are some of the things that make you so
+                precious to me. 🥹🌸
+            </p>
+
+            <p>
+                I hope you always remember that you deserve
+                happiness, love, beautiful memories and
+                everything your heart wishes for. And whenever
+                life gets difficult, I hope you remember that
+                there is someone who will always be cheering
+                for your smile. 🧸💗
+            </p>
+
+            <p>
+                So today, forget all the worries, eat lots of
+                cake, smile as much as possible and enjoy every
+                little moment because today is YOUR day. 🎂✨
+            </p>
+
+            <p>
+                And finally...
+            </p>
+
+            <p style="text-align:center; font-size:21px;">
+                Thank you for being YOU. 💕<br>
+                You are truly one of the sweetest parts
+                of my world. 🌷
+            </p>
+
+        </div>
+
+        <div class="birthday">
+            HAPPY BIRTHDAYYYYY!! 🎂🎉💗🥳
+        </div>
+
+        <p>
+            May this year bring you endless smiles,
+            beautiful surprises and all the happiness
+            you deserve! 🌸✨
+        </p>
+
+        <div style="font-size:30px;">
+            🧸 💗 🌷 🎂 🌸 🎀 ✨ 🦋
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+    /* -------------------------
+       PAGE NAVIGATION
+    ------------------------- */
+
+    function goToPage(number) {
+
+        document.querySelectorAll(".page").forEach(function(page) {
+
+            page.style.display = "none";
+
+        });
+
+        document.getElementById("page" + number).style.display = "flex";
+    }
+
+
+    /* -------------------------
+       GIFT SELECTION
+    ------------------------- */
+
+    let selectedGift = "";
+
+    function chooseGift(gift) {
+
+        selectedGift = gift;
+
+        goToPage(3);
+
+    }
+
+
+    /* -------------------------
+       LESS LOVE BUTTON
+    ------------------------- */
+
+    let teddySize = 80;
+
+    function lessLove() {
+
+        teddySize = teddySize + 35;
+
+        document.getElementById("sadTeddy").style.fontSize =
+            teddySize + "px";
+
+        let messages = [
+
+            "Awww... that's all? 🥺",
+
+            "Really?? 😭",
+
+            "My teddy is getting sadder... 🥹",
+
+            "Please don't do this to me 😭🧸",
+
+            "Okay okay... I am VERY sad now! 😭",
+
+            "LOOK HOW BIG MY SAD TEDDY IS!! 🥺🧸"
+
+        ];
+
+        let index =
+            Math.floor(Math.random() * messages.length);
+
+        document.getElementById("loveMessage").innerHTML =
+            messages[index];
+
+    }
+
+
+    /* -------------------------
+       MORE LOVE BUTTON
+    ------------------------- */
+
+    function moreLove() {
+
+        document.getElementById("loveMessage").innerHTML =
+            "I KNEW YOU LOVED ME!! 😭💗";
+
+        goToPage(4);
+
+        document.getElementById("happyTeddy")
+            .classList.add("happyDance");
+
+        createPops();
+
+    }
+
+
+    /* -------------------------
+       POP / CONFETTI
+    ------------------------- */
+
+    function createPops() {
+
+        const emojis = [
+            "🎉",
+            "🎊",
+            "💗",
+            "💕",
+            "🌸",
+            "🌷",
+            "✨",
+            "🥳",
+            "💖",
+            "🎀"
+        ];
+
+        for(let i = 0; i < 70; i++) {
+
+            let pop =
+                document.createElement("div");
+
+            pop.className = "pop";
+
+            pop.innerHTML =
+                emojis[Math.floor(Math.random() * emojis.length)];
+
+            pop.style.left =
+                Math.random() * 100 + "vw";
+
+            pop.style.top =
+                Math.random() * 100 + "vh";
+
+            document.body.appendChild(pop);
+
+            let x =
+                (Math.random() - 0.5) * 500;
+
+            let y =
+                (Math.random() - 0.5) * 500;
+
+            pop.animate(
+
+                [
+                    {
+                        transform: "scale(0) rotate(0deg)",
+                        opacity: 1
+                    },
+
+                    {
+                        transform:
+                            "translate(" + x + "px," +
+                            y + "px) scale(1.5) rotate(360deg)",
+                        opacity: 0
+                    }
+                ],
+
+                {
+                    duration:
+                        1200 + Math.random() * 1500,
+
+                    easing: "ease-out"
+                }
+
+            );
+
+            setTimeout(function() {
+
+                pop.remove();
+
+            }, 3000);
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+</html>
